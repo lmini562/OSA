@@ -10,6 +10,7 @@ using namespace std;
 
 const string PATH = "F:\\qwe.txt";
 
+//находим среднее значение целочисленного массива (интов)
 float Avg(int* arr, int size)
 {
     float avg = 0;
@@ -20,7 +21,7 @@ float Avg(int* arr, int size)
     }
     return avg / size;
 }
-
+//показывает сходства 2-х строк
 float process(string S1, string S2)
 {
     int i, x = 0;
@@ -42,7 +43,7 @@ float process(string S1, string S2)
 
     return ((x / N) * 100);
 }
-
+//структура студентов
 struct Student
 {
 public:
@@ -74,7 +75,7 @@ public:
         grades = inputGrades;
         averageGrade = Avg(grades, amountOfGrades);
     }
-
+    //метод выводит данные об этой структурированной переменной
     void Show()
     {
         cout << "Name: " << fullName << endl;
@@ -90,7 +91,7 @@ public:
         cout << "Average grade: " << averageGrade << endl;
     }
 };
-
+//класс базы данных
 class DataBase
 {
 protected:
@@ -107,10 +108,12 @@ public:
         length = len;
         arr = new Student[length];
     }
+    //метод очищает заданный элемент
     void ClearElement(int index) // making element empty
     {
         arr[index].isEmpty = true;
     }
+    //метод находит 1-й пустой элемент
     int FindCleareElement()  // find first cleare element
     {
         for (int i = 0; i < length; i++)
@@ -122,6 +125,7 @@ public:
         }
         return -1;
     }
+    //метод позволяет ввести данные структурной переменной в указанную позицию
     void InputData(int index) // input data for element with index = index
     {
         if ((index < length) && (index >= 0))
@@ -156,6 +160,7 @@ public:
     {
         arr[index] = student;
     }
+    //выводит на экран значения структурной переменной
     void ShowOneData(int index) // show element with index = index
     {
         if ((index < length) && (index >= 0))
@@ -179,6 +184,7 @@ public:
             cout << endl << "ERROR!!!";
         }
     }
+    //метод выводит все значения непустых элементов
     void ShowAllData()  // shows all not empty elements
     {
         for (int i = 0; i < length; i++)
@@ -191,6 +197,8 @@ public:
         }
 
     }
+    //метод возвращает структурную переменную с указанным среднем значением
+    //оценок из структурной переменной Student
     Student FindStudentWithAverageGrade(float avgGrade)  // finds student with exact or more similar grade
     {
         int index = -1;
@@ -215,6 +223,7 @@ public:
         }
         return arr[index];
     }
+    //метод находит человека с таким же или похожим именем
     Student FindStudentWithName(string name)  // finds student with exact or more similar name
     {
         float maxProximity = -1;
@@ -240,6 +249,8 @@ public:
         }
         return arr[index];
     }
+    //метод находит стуркутрну. переменную с минимальных значением поля
+    //которое передается в качестве аргумента
     Student FindStudentWithMin(int option) // 0 - to find minimum of amount of grades, 1 - to find minimum average grade
     {
         if (option != 1 && option != 0)
@@ -294,6 +305,8 @@ public:
             }
         }
     }
+    //метод сортирует по возрастанию все элементы по значению поля
+    //которое передается в качестве аргумента функции
     void SortAscendDB(int option)  // 0 - to sort by amount of grades, 1 - to sort by average grades (ascending)
     {
         if (option == 0)
@@ -331,6 +344,8 @@ public:
             }
         }
     }
+    //метод сортирует по убывани. все элементы поля
+    //которое передается в качестве аргумента функции
     void SortDescendDB(int option)  // 0 - to find sort by amount of grades, 1 - to sort by average grades (descending)
     {
         if (option == 0)
@@ -500,6 +515,130 @@ public:
 };
 int main()
 {
+    //1 пункт. Создание БД (по умолчанию размер 10)
+    /*DataDase db = DataBase(3);*/
+
+    //2 пункт. Показать всю БД. Вызываем метод без параметров
+    /*db.ShowAllData();
+    cout << endl;*/
+
+    //3 пункт. Добавляем элементы в БД. Вызываем метод с аргументом(индексом элемента внутри БД)
+    //или двумя жлементами внутри бд и самим студентом
+    /*db.InputData(0, s1);
+    * db.InputData(1);
+    * db.ShowAllData();
+    */
+
+    //4 пункт. Очисткм элемента. Вызываем метод с одним параметром (индексом внутри БД)
+    /*db.InputData(0, s1);
+    * db.InputData(1);
+    * db.ShowAllData();
+    * cout << endl << endl;
+    * db.ClearElement(0);
+    * db.ShowAllData();
+    */
+
+    //5 пункт. Находим первый пустой элемент в БД. Вывовем метод, он вернет значение инта индекса
+    /*db.InputData(0, s1);
+    * db.InputData(1, s2);
+    * db.ClearElement(1);
+    * cout << db.FindCleareElement();
+    */
+
+    //6 пункт. Показываем только один жлемент БД. Метод принимает один аргумент - индекс элемента внутри БД
+    /*db.InputData(0, s1);
+    * db.InputData(1, s2);
+    * db.ShowOneData(0);
+    */
+
+    //7 пункт. Находим студента со средней оценкой ближ. к какой-то. Вызываем метод, который принимает один аргумент
+    //типа флоат - нужную ср оценку
+    /*db.InputData(0, s1);
+    * db.InputData(1, s2);
+    * db.InputData(2, s3);
+    * db.ShowAllData();
+    * cout << endl;
+    * db.FindStudentWithAverageGrade(5).Show();
+    */
+    
+    //8 пункт. Находим студента с именем. Метод принимает один аругмент типа стринг - нужное имя
+    /*db.InputData(0, s1);
+    * db.InputData(1, s2);
+    * db.InputData(2, s3);
+    * db.ShowAllData();
+    * cout << endl;
+    * db.FindStudentWithName("Dr").Show();
+    */
+
+    //9 пункт. Сортировка БД по возрастанию оценок или значению ср. оценки. Метод принимает один параметр
+    //аргумент типа инт (0-количество оценок, 1 для сортировке по ср оценке)
+    /*db.InputData(0, s1);
+    * db.InputData(1, s2);
+    * db.InputData(2, s3);
+    * db.ShowAllData();
+    * cout << endl;
+    * db.SortAscendDB(1);
+    * db.ShowAllData():
+    */
+
+    //10 пункт. Сортировка БД по убыванию количества оценок или зн.ср.оценки
+    //метод принимает 1 параметр типа инт (0-сортировка по кол-ву оценок, 1-сортировка по ср.оценке)
+    /*db.InputData(0, s1);
+    * db.InputData(1, s2);
+    * db.InputData(2, s3);
+    * db.ShowAllData();
+    * cout << endl;
+    * db.SortDescendDB(1);
+    * db.ShowAllData();
+    */
+
+    //11 пункт. Сохраняем БД в файл. Вызываем метод, который
+    //принимает 1 параметр - аргумент типа стринг - название тхт файла в котором все хранится
+    /*db.InputData(0, s1);
+    * db.InputData(1, s2);
+    * db.InputData(2, s3);
+    * db.ShowAllData();
+    * const strint PATH = "F:\\qwe.txt";
+    * db.SaveDB(PATH);
+    */
+
+    //12 пункт. Находим размер БД. Вызываем метод, который
+    //принимает один параметр - аргумент типа стринг - название тхт файла
+    /*db.InputData(0, s1);
+    * db.InputData(1, s2);
+    * db.InputData(2, s3);
+    * db.ShowAllData();
+    * const strint PATH = "F:\\qwe.txt";
+    * db.SaveDB(PATH);
+    * cout << db.FindDBLenth(PATH);
+    */
+
+    //13 пункт. Загружаем БД из файла, вызываем метод, который принимает
+    //параметр - аргумент типа стринг - название тхт файла
+    /*db.InputData(0, s1);
+    db.InputData(1, s2);
+    db.InputData(2, s3);
+
+    db.ShowAllData();
+    cout << endl;
+
+    cout << endl;
+    //cout << db.FindCleareElement();
+    cout << endl;
+    db.SortDescendDB(1);
+    cout << endl << endl << endl << endl;
+
+    db.SaveDB(PATH);
+
+    int a = db.FindDBLength(PATH);
+
+    DataBase db1 = DataBase(a);
+    db1.LoadDB(PATH);
+
+    db1.ShowAllData();
+    */
+
+
     int length = 3;
 
     DataBase db = DataBase(3);
