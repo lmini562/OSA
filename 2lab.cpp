@@ -3,6 +3,7 @@
 #include <string>
 #include <algorithm>
 #include <fstream>
+#include <Windows.h>
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -114,7 +115,7 @@ public:
         arr[index].isEmpty = true;
     }
     //метод находит 1-й пустой элемент
-    int FindCleareElement()  // find first cleare element
+    int FindCleareElement()  // find first clear element
     {
         for (int i = 0; i < length; i++)
         {
@@ -515,6 +516,100 @@ public:
 };
 int main()
 {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    int x;
+    DataBase db = DataBase();
+    string str;
+    do {
+        cout << "Что Вы хотите сделать?" << endl;
+        cout << "Введите 1, чтобы вывести на экран все элементы Базы данных" << endl;
+        cout << "Введите 2, чтобы ввести информацию по индексу" << endl;
+        cout << "Введите 3, чтобы очистить элемент по индексуу" << endl;
+        cout << "Введите 4, чтобы найти индекс первого пустой записи" << endl;
+        cout << "Введите 5, чтобы вывести одну запись по её индексу" << endl;
+        cout << "Введите 6, чтобы найти студента с самой близкой к заданной средней оценкой" << endl;
+        cout << "Введите 7, чтобы найти студента по имени" << endl;
+        cout << "Введите 8, чтобы отсортировать баззу данных по возрастанию количества оценок" 
+        << "или по значению средней оценки" << endl;
+        cout << "Введите 9, чтобы отсортировать баззу данных по убыванию количества оценок" 
+        << "или по значению средней оценки" << endl;
+        cout << "Введите 11, чтобы записать Базу данных в файл" << endl;
+        cout << "Введите 11, чтобы найти размер Базы данных" << endl;
+        cout << "Введите 12, чтобы загрузить Баззу данных из файла" << endl;
+        cout << "Введите 13, чтобы выйти из программы" << endl;
+
+        cin >> x;
+
+        switch(x){
+            case 1:
+                db.ShowAllData();
+                cout << endl;
+                break;
+            case 2:
+                int k;
+                cout << "Введите индекс элемента:" << endl;
+                cin >> k;
+                db.InputData(k);
+                break;
+            case 3:
+                int k;
+                cout << "Введите индекс элемента:" << endl;
+                cin >> k;
+                db.ClearElement(k);
+                break;        
+            case 4:
+                cout << "Первый пустой элемент имеет индекс " << db.FindCleareElement() << endl;
+                break;
+            case 5:
+                int k;
+                cout << "Введите индекс элемента:" << endl;
+                cin >> k;
+                db.ShowOneData(k);
+                break;
+            case 6:
+                float f;
+                cout << "Введите значение для поиска:" << endl;
+                cin >> f;
+                db.FindStudentWithAverageGrade(5).Show();
+                break;
+            case 7:
+                cout << "Введите имя для поиска:" << endl;
+                cin.ignore(32767, '\n');
+                getline(cin,str);
+                db.FindStudentWithName(str).Show();
+                break;
+            case 8:
+                int k;
+                cout << "Введите 0 для сортировки по количеству оценок, 1 для сортировки по"
+                << " средней оценке"<< endl;
+                cin >> k;
+                db.SortAscendDB(k);
+                break;
+            case 9:
+            int k;
+                cout << "Введите 0 для сортировки по количеству оценок, 1 для сортировки по"
+                << " средней оценке"<< endl;
+                cin >> k;
+                db.SortDescendDB(k);
+                break;
+            case 10:
+                db.SaveDB(PATH);
+                cout << "База данных успешно записана" << endl;
+                break;
+            case 11:
+                cout << "Размер Базы данных равен " << db.FindDBLength(PATH) << endl;
+                break;
+            case 12:
+                db.LoadDB(PATH);
+                cout << "База данных успешно прочитана" << endl;
+                break;
+            case 13:
+                return 0;
+        }
+    }while(true);
+    
     //1 пункт. Создание БД (по умолчанию размер 10)
     /*DataDase db = DataBase(3);*/
 
@@ -639,7 +734,7 @@ int main()
     */
 
 
-    int length = 3;
+    /*int length = 3;
 
     DataBase db = DataBase(3);
 
@@ -672,5 +767,5 @@ int main()
     DataBase db1 = DataBase(a);
     db1.LoadDB(PATH);
 
-    db1.ShowAllData();
+    db1.ShowAllData();*/
 }
